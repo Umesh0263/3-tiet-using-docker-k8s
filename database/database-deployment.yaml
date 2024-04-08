@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database-app
+  labels:
+    app: database
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: database
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      containers:
+        - name: studentapp-database
+          image: umeshdamale/student-database
+          ports:
+            - containerPort: 3306
+  strategy:
+    type: RollingUpdate
